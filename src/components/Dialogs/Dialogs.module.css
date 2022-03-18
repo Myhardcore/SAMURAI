@@ -1,6 +1,7 @@
 .dialogs a {
     text-decoration: none;
     color: #FF7477;
+    padding-left: 10px;
 }
 
 .dialogs {
@@ -16,21 +17,46 @@
 .dialogsItems {
     padding: 10px;
 
+
 }
 
 .dialog {
-
+    margin-top: 10px;
 }
 
 .messages {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 
 
 }
+
+.messages .message:nth-child(odd) {
+    background-color: white;
+
+}
+
+.messages .message:nth-child(even) {
+    background-color: #FF7477;
+    text-align: right;
+
+}
+
 
 .message {
     background-color: white;
     margin-bottom: 15px;
     padding: 10px;
     border-radius: 10px;
+
+}
+
+
+.dialog_ava {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    vertical-align: middle;
+
 }
