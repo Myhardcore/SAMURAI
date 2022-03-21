@@ -2,6 +2,7 @@ import React from "react";
 import classes from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
+import {addMessage} from "../../Redux/State";
 
 const Dialogs = props => {
     let dialogsElements = props.state.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}
@@ -10,7 +11,7 @@ const Dialogs = props => {
                                                                             key={message.id}/>)
     let messageText = React.createRef();
     let sendMessageHandler = () => {
-        console.log(messageText.current.value)
+        props.addMessage(messageText.current.value)
     }
     return (
         <div className={classes.dialogs}>
