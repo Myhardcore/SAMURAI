@@ -1,5 +1,5 @@
 let renderEntireTree = () => {
-    console.log('rendered')
+
 }
 let state = {
     profilePage: {
