@@ -13,6 +13,9 @@ const Dialogs = props => {
     let sendMessageHandler = () => {
         props.addMessage(messageText.current.value)
     }
+    let messageChangeHandler = () => {
+        props.messageChange(messageText.current.value)
+    }
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
@@ -21,7 +24,7 @@ const Dialogs = props => {
             </div>
             <div className={classes.messages}>
                 {messagesElements}
-                <textarea ref={messageText}></textarea>
+                <textarea value={props.msgInput} ref={messageText} onChange={messageChangeHandler}/>
                 <button onClick={sendMessageHandler}>Send</button>
             </div>
         </div>
