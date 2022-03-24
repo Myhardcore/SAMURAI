@@ -7,10 +7,11 @@ const Profile = props => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts data={props.state.postsData} addPost={props.addPost}
-                     inputChange={props.inputChange} input={props.input}/>
+            <MyPosts data={props.state.postsData} dispatch={props.dispatch}
+                     input={props.input}/>
         </div>
     )
+
 }
 export default Profile;
 

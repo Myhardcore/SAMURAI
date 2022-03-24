@@ -1,18 +1,21 @@
 import React from "react";
 import classes from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {addPostHandlerActionCreator, inputChangeHandlerActionCreator} from "../../../Redux/State";
 
 
 const MyPosts = props => {
-    let text = React.createRef()
+
+    let newPostElement = React.createRef()
     let addPostHandler = () => {
-        props.addPost()
+        props.dispatch(addPostHandlerActionCreator())
     }
 
     let postsElements = props.data.map(post => <Post message={post.message} count={post.likesCount} key={post.id}/>)
 
     let inputChangeHandler = () => {
-        props.inputChange(text.current.value)
+        let text = newPostElement.current.value
+        props.dispatch(inputChangeHandlerActionCreator(text))
 
     }
     return (
@@ -20,7 +23,7 @@ const MyPosts = props => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea value={props.input} onChange={inputChangeHandler} ref={text}/>
+                    <textarea value={props.input} onChange={inputChangeHandler} ref={newPostElement}/>
                 </div>
                 <button onClick={addPostHandler}>Add Post</button>
             </div>
