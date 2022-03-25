@@ -1,3 +1,6 @@
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+
 let store = {
     _state: {
         profilePage: {
@@ -43,42 +46,13 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.inputText,
-                likesCount: 0
-            };
-            this._state.profilePage.postsData.push(newPost);
-            this._state.profilePage.inputText = ''
-            this._callSubscriber(this._state);
-        } else if (action.type === INPUT_CHANGE) {
-            this._state.profilePage.inputText = action.inputText;
-            this._callSubscriber(this._state)
-        } else if (action.type === ADD_MESSAGE) {
-            let newMessage = {
-                id: 8,
-                message: this._state.messagesPage.messageInput,
-            }
-            this._state.messagesPage.messagesData.push(newMessage)
-            this._state.messagesPage.messageInput = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === MESSAGE_CHANGE) {
-            this._state.messagesPage.messageInput = action.msgInput;
-            this._callSubscriber(this._state)
-        }
+
+        profileReducer(this._state.profilePage, action)
+        dialogsReducer(this._state.messagesPage, action)
+        this._callSubscriber(this._state);
+
     },
 }
-
-let ADD_POST = 'ADD-POST';
-let INPUT_CHANGE = 'INPUT-CHANGE';
-let ADD_MESSAGE = 'ADD-MESSAGE';
-let MESSAGE_CHANGE = 'MESSAGE-CHANGE';
-
-export const addPostHandlerActionCreator = () => ({type: ADD_POST})
-export const inputChangeHandlerActionCreator = text => ({type: INPUT_CHANGE, inputText: text})
-export const sendMessageHandlerActionCreator = () => ({type: ADD_MESSAGE})
-export const messageChangeHandlerActionCreator = msgText => ({type: MESSAGE_CHANGE, msgInput: msgText})
 
 export default store;
 window.store = store;
