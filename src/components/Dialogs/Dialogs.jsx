@@ -2,24 +2,23 @@ import React from "react";
 import classes from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import {messageChangeHandlerActionCreator, sendMessageHandlerActionCreator} from "../../Redux/dialogs-reducer";
 
 
 const Dialogs = props => {
 
-    let dialogsElements = props.state.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}
-                                                                            key={dialog.id}/>)
-    let messagesElements = props.state.messagesData.map(message => <Message message={message.message}
-                                                                            key={message.id}/>)
+    let dialogsElements = props.dialogsData.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}
+                                                                                  key={dialog.id}/>)
+    let messagesElements = props.messagesData.messagesData.map(message => <Message message={message.message}
+                                                                                   key={message.id}/>)
 
     let messageText = React.createRef();
 
     let sendMessageHandler = () => {
-        props.dispatch(sendMessageHandlerActionCreator())
+        props.sendMessage();
     }
     let messageChangeHandler = () => {
         let msgText = messageText.current.value
-        props.dispatch(messageChangeHandlerActionCreator(msgText))
+        props.messageChange(msgText)
     }
 
     //RET
@@ -31,7 +30,7 @@ const Dialogs = props => {
             </div>
             <div className={classes.messages}>
                 {messagesElements}
-                <textarea value={props.msgInput} ref={messageText} onChange={messageChangeHandler}/>
+                <textarea value={props.msgInput.messageInput} ref={messageText} onChange={messageChangeHandler}/>
                 <button onClick={sendMessageHandler}>Send</button>
             </div>
         </div>
