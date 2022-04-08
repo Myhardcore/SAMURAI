@@ -12,7 +12,7 @@ let initialState = {
     ],
     messagesData: [
         {id: 1, message: 'Hi'},
-        {id: 2, message: 'How is your it-kamasutra?'},
+        {id: 2, message: 'How is your day?'},
         {id: 3, message: 'Yo'},
         {id: 4, message: 'Yo'},
         {id: 5, message: 'Yo'},
@@ -21,22 +21,22 @@ let initialState = {
 }
 const DialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_MESSAGE: {
-            let newMessage = {
-                id: 8,
-                message: state.messageInput,
+        case ADD_MESSAGE:
+
+            return {
+                ...state,
+                messagesData: [...state.messagesData, {
+                    id: 8,
+                    message: state.messageInput
+                }],
+                messageInput: ''
+            };
+
+        case MESSAGE_CHANGE:
+            return {
+                ...state,
+                messageInput: action.msgInput
             }
-            let stateCopy = {...state}
-            stateCopy.messagesData = [...state.messagesData]
-            stateCopy.messagesData.push(newMessage)
-            stateCopy.messageInput = '';
-            return stateCopy;
-        }
-        case MESSAGE_CHANGE: {
-            let stateCopy = {...state}
-            stateCopy.messageInput = action.msgInput;
-            return stateCopy
-        }
         default:
             return state;
     }
